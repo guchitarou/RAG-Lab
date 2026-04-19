@@ -1,0 +1,10 @@
+
+model_weights/artifact.metadata
+model_weights/config.json
+model_weights/gitattributes
+model_weights/model.safetensors
+model_weights/README.md
+model_weights/special_tokens_map.json
+model_weights/tokenizer_config.json
+model_weights/vocab.txt
+__pycache__
