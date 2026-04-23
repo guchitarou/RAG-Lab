@@ -1,7 +1,18 @@
 from fastapi import FastAPI
 import uvicorn
+from ollama import Client
 
 app = FastAPI()
+
+try:
+    with open("config.txt", "r", encoding="utf-8") as f:
+        # read().strip() で、前後の余計な改行やスペースを取り除きます
+        target_url = f.read().strip()
+except FileNotFoundError:
+    print("config.txtが見つかりません。")
+    target_url = "http://localhost:11434" # 見つからない場合のデフォルト
+
+client = Client(host=target_url)
 
 @app.get("/")
 def read_root():
@@ -9,9 +20,23 @@ def read_root():
 
 @app.post("/predict")
 def predict(data: dict):
-    # ここに処理を書く
-    print(data)
-    return {"result": "success", "data": data}
+    print("ollama動きました！")
+    question = data.get("question", "")
+    selected_chunk = data.get("selected_chunk", "")
+    print(f"質問: {question}")
+    print("---"*3)
+    print(f"選択されたチャンク: {selected_chunk}")
+    print("---"*3)
+    response = client.chat(
+        model='gemma4:e4b',
+        messages=[
+             {"role": "system", "content": "あなたはアシスタントです。参考情報をもとに回答を作成してください。ただし、そのまま参考情報を回答に含めないでください。"},
+            {'role': 'user', 'content': f"参考情報: {selected_chunk}"},
+            {'role': 'user', 'content': question},    
+        ],
+    )
+
+    return {"result": "success", "data": response.message.content}
 
 
 # 2. このブロックを追加

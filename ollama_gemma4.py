@@ -7,7 +7,8 @@ client = Client(host='http://192.168.11.7:11434')
 response = client.chat(
     model='gemma4:e4b',
     messages=[
-        {'role': 'user', 'content': 'WSLからこんにちは！'}
+        {'role': 'user', 'content': 'MYPP114514からこんにちは！'},
+        {'role': 'user', 'content': '参考情報MYPP114514はWSLのことです。'}
     ],
 )
 
