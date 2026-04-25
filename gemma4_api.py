@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 from ollama import Client
+import requests
 
 app = FastAPI()
 
@@ -32,6 +33,22 @@ def predict(data: dict):
         messages=[
              {"role": "system", "content": "あなたはアシスタントです。参考情報をもとに回答を作成してください。ただし、そのまま参考情報を回答に含めないでください。"},
             {'role': 'user', 'content': f"参考情報: {selected_chunk}"},
+            {'role': 'user', 'content': question},    
+        ],
+    )
+
+    return {"result": "success", "data": response.message.content}
+
+@app.post("/predict_simple")
+def predict(data: dict):
+    print("ollama動きました！")
+    question = data.get("question", "")
+    print(f"質問: {question}")
+    print("---"*3)
+    response = client.chat(
+        model='gemma4:e4b',
+        messages=[
+             {"role": "system", "content": "あなたはアシスタントです。参考情報をもとに回答を作成してください。ただし、そのまま参考情報を回答に含めないでください。"},
             {'role': 'user', 'content': question},    
         ],
     )
