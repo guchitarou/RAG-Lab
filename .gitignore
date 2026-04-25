@@ -8,3 +8,6 @@ model_weights/special_tokens_map.json
 model_weights/tokenizer_config.json
 model_weights/vocab.txt
 __pycache__
+embedding_models/GLuCoSE_base_ja_v2_weights
+embedding_models/MiniLM_L6_v2_weights
+embedding_models/multilingual_e5_base_weights
