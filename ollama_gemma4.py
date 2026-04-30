@@ -332,7 +332,7 @@ update();
 response = client.chat(
     model='gemma4:e4b',
     messages=[
-        {'role': 'user', 'content': '次のコードを何をするコードか解析し、概要のみ端的に出力せよ'},
+        {"role": "system", 'content': '次のコードを何をするコードか解析し、概要のみ端的に出力せよ'},
         {'role': 'user', 'content':scriptes}
     ],
 )

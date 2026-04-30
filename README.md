@@ -32,7 +32,7 @@ CUDA_VISIBLE_DEVICES=0 python rag_chat_app.py
 ```
 
 [http://0.0.0.0:7860](http://172.18.131.28:7860/?__theme=dark)
-
+# hostname -Iで確認できる 
 
 ## 実験
 pdfの中身に下記の情報を追記した。これがChatで聞いたときに正しく返してくれるか確認する。
